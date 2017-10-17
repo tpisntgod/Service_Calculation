@@ -5,4 +5,16 @@
 rd = bufio.NewReader(file)。通过line, err := rd.ReadString('\n')按行读取文件。  
 如果以'\f'作为分页符，则line, err := rd.ReadString('\f')，且加上一句去掉分页符的语句，line = strings.Trim(line, "\f")，将分页符改为换行符，
 输出更好看，二者差别不大。其余就是统计页数啊什么的。
-3. 管道，使用了 os/exec 包来建立用于进程间通信的管道。
+3. 管道，使用了 os/exec 包来建立用于进程间通信的管道。给出部分代码。
+
+```
+	cmd := exec.Command("cat", "-n")
+	stdin, caterr := cmd.StdinPipe()
+	if caterr != nil {
+		fmt.Fprintln(os.Stderr, "error happened about standard input of command cat")
+	}
+	...
+	stdin.Close()
+	cmd.Stdout = os.Stdout
+	cmd.Start()
+```
