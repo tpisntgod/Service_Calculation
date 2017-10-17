@@ -130,4 +130,4 @@ output:
 input: `go run selpg.go -s 1 -e 1 smalltest >outputfile 2>errorfile &`  
 output:  
 ![](./printscreen/14.png)  
-后台运行并且程序执行完毕  
+程序后台运行并且执行完毕  
