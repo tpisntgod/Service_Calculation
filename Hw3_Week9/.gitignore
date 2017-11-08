@@ -1,5 +1,3 @@
 # Binaries for programs and plugins
 server
 
-# Test binary, build with `go test -c`
-abtest
