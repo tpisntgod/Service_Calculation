@@ -1,0 +1,6 @@
+http://localhost:8080/register?name=qwe1&password=qwe
+http://localhost:8080/login?name=qwe1&password=qwe
+http://localhost:8080/logout
+http://localhost:8080/cm?title=webmeet1&p=aa&p=cc&stime=2017-10-28 09:30:00&etime=2017-10-28 10:30:00
+http://localhost:8080/qm?stime=2017-10-01 09:30:00&etime=2017-10-31 10:30:00
+http://localhost:8080/cancelmeeting?title=meet
