@@ -1,84 +1,94 @@
 package controller
 
 import (
+	"errors"
 	"fmt"
-	"io/ioutil"
 	"net/http"
-	"os"
-	"path/filepath"
-	"runtime"
-	"strings"
+	"strconv"
 
 	"github.com/tpisntgod/Service_Calculation/Hw3_Week9/Web-todolist/model"
 )
 
-var htmlpath = "src/github.com/tpisntgod/Service_Calculation/Hw3_Week9/Web-todolist/html_template"
-
-//GetGOPATH 获得用户环境的gopath
-func GetGOPATH() *string {
-	var sp string
-	if runtime.GOOS == "windows" {
-		sp = ";"
-	} else {
-		sp = ":"
+//RegisterUser 注册用户
+func RegisterUser(r *http.Request) error {
+	r.ParseForm()
+	//是否需要判断len大于1，url和表单同时提交了对应item
+	if r.Form["username"][0] == "" {
+		return errors.New("用户名不能为空")
 	}
-	goPath := strings.Split(os.Getenv("GOPATH"), sp)
-	for _, v := range goPath {
-		if _, err := os.Stat(filepath.Join(v, "/src/github.com/tpisntgod/Service_Calculation/Hw3_Week9/Web-todolist/html_template/mainpage.html")); !os.IsNotExist(err) {
-			return &v
-		}
+	if r.Form["password"][0] == "" {
+		return errors.New("密码不能为空")
 	}
-	return nil
+	fmt.Println(r.Form["username"][0])
+	fmt.Println(r.Form["password"][0])
+	if model.QueryUser(r.Form["username"][0]) {
+		return errors.New("此用户名已经被注册")
+	}
+	err := model.RegisterUser(r.Form["username"][0], r.Form["password"][0])
+	return err
 }
 
-var i int
+//LoginUser 登录用户
+func LoginUser(r *http.Request) error {
+	r.ParseForm()
+	if r.Form["username"][0] == "" {
+		return errors.New("用户名不能为空")
+	}
+	if r.Form["password"][0] == "" {
+		return errors.New("密码不能为空")
+	}
+	fmt.Println(r.Form["username"][0])
+	fmt.Println(r.Form["password"][0])
+	if model.QueryUser(r.Form["username"][0]) {
+		return nil
+	}
+	return errors.New("此用户还没有注册")
+}
 
-//MainPage 主页面
-func MainPage(w http.ResponseWriter, r *http.Request) {
-	/*
-		t := template.Must(template.ParseFiles("mainpage.html"))
-		t.Execute(w,{})
-	*/
+//QueryUser 查询用户是否存在
+func QueryUser(r *http.Request) error {
+	r.ParseForm()
+	if r.Form["username"][0] == "" {
+		return errors.New("用户名不能为空")
+	}
+	fmt.Println(r.Form["username"][0])
+	if model.QueryUser(r.Form["username"][0]) {
+		return nil
+	}
+	return errors.New("此用户还没有注册")
+}
 
-	mainpage, err := ioutil.ReadFile(htmlpath + "/mainpage.html")
+//AddTodoItem 增加用户todoitem
+func AddTodoItem(username string, r *http.Request) error {
+	if r.Form["todoitem"][0] == "" {
+		return errors.New("todoitem不能为空")
+	}
+	fmt.Println("add todoitem "+username, r.Form["todoitem"][0])
+	err := model.AddTodoItem(username, r.Form["todoitem"][0])
+	return err
+}
+
+//QueryTodoItem 查找用户todoitem
+func QueryTodoItem(username string) (string, error) {
+	todoItemInfo := model.QueryTodoItem(username)
+	if todoItemInfo == "" {
+		return todoItemInfo, errors.New("该用户没有todoitem")
+	}
+	return todoItemInfo, nil
+}
+
+//DeleteTodoItem 删除用户todoitem
+func DeleteTodoItem(username string, r *http.Request) error {
+	if r.Form["tid"][0] == "" {
+		return errors.New("tid不能为空")
+	}
+	tid, err := strconv.ParseInt(r.Form["tid"][0], 10, 64)
 	if err != nil {
-		fmt.Fprintf(w, err.Error())
+		return err
 	}
-	fmt.Fprintf(w, string(mainpage))
-}
-
-//Register 注册用户
-func Register(w http.ResponseWriter, r *http.Request) {
-	if r.Method == "GET" {
-		registerpage, err := ioutil.ReadFile(htmlpath + "/register.html")
-		if err != nil {
-			fmt.Fprintf(w, err.Error())
-		}
-		fmt.Fprintf(w, string(registerpage))
-	}
-	if r.Method == "POST" {
-		r.ParseForm()
-		if r.Form["username"][0] == "" {
-			fmt.Fprintf(w, "用户名不能为空")
-			return
-		}
-		if r.Form["password"][0] == "" {
-			fmt.Fprintf(w, "密码不能为空")
-			return
-		}
-		fmt.Println(r.Form["username"][0])
-		fmt.Println(r.Form["password"][0])
-		if model.QueryUser(r.Form["username"][0]) {
-			fmt.Fprintf(w, "此用户名已经被注册")
-			return
-		}
-		model.RegisterUser(r.Form["username"][0], r.Form["password"][0])
-		http.Redirect(w, r, "/", http.StatusFound)
-	}
-}
-
-func init() {
-	htmlpath = filepath.Join(*GetGOPATH(), htmlpath)
+	fmt.Println(username, tid)
+	err = model.DeleteTodoItem(username, tid)
+	return err
 }
 
 func checkErr(err error) {
