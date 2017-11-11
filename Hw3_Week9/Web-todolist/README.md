@@ -70,6 +70,7 @@ Server Software:
 Server Hostname:        localhost  
 Server Port:            8080  
 
+//请求的文档的相关信息，所在位置，文档的大小  
 Document Path:          /  
 Document Length:        461 bytes  
 
@@ -103,3 +104,63 @@ Percentage of the requests served within a certain time (ms)  //请求处理时�
   98%     54  
   99%     57  
  100%     66 (longest request)  
+
+下面的ab测试包含了查询数据库操作，因为Document Length太小了只有22 bytes，50%请求和90%请求的处理时间都减少了不少，服务器吞吐量增加，用户平均等待时间，服务器平均请求处理时间减少  
+对于模拟POST请求进行测试，需要把POST的数据（一般是json格式）放在文件里。使用-p参数指定需要post的数据，-T参数,指定使用的content-type  
+ab -n 1000 -c 100 -p post_data -T 'application/json' http://localhost:8080/todoitemQuery  
+This is ApacheBench, Version 2.3 <$Revision: 1706008 $>  
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/  
+Licensed to The Apache Software Foundation, http://www.apache.org/  
+
+Benchmarking localhost (be patient)  
+Completed 100 requests  
+Completed 200 requests  
+Completed 300 requests  
+Completed 400 requests  
+Completed 500 requests  
+Completed 600 requests  
+Completed 700 requests  
+Completed 800 requests  
+Completed 900 requests  
+Completed 1000 requests  
+Finished 1000 requests  
+
+
+Server Software:        
+Server Hostname:        localhost  
+Server Port:            8080  
+
+Document Path:          /todoitemQuery  
+Document Length:        22 bytes  
+
+Concurrency Level:      100  
+Time taken for tests:   0.067 seconds  
+Complete requests:      1000  
+Failed requests:        0  
+Total transferred:      139000 bytes  
+Total body sent:        170000  
+HTML transferred:       22000 bytes  
+Requests per second:    14834.37 [#/sec] (mean)  
+Time per request:       6.741 [ms] (mean)  
+Time per request:       0.067 [ms] (mean, across all concurrent requests)  
+Transfer rate:          2013.65 [Kbytes/sec] received  
+                        2462.74 kb/s sent  
+                        4476.39 kb/s total  
+
+Connection Times (ms)  
+              min  mean[+/-sd] median   max  
+Connect:        0    1   1.3      1       6  
+Processing:     0    5   3.0      5      17  
+Waiting:        0    4   2.6      4      13  
+Total:          0    6   3.2      5      19  
+
+Percentage of the requests served within a certain time (ms)  
+  50%      5  
+  66%      7  
+  75%      9  
+  80%     10  
+  90%     11  
+  95%     12  
+  98%     13  
+  99%     14
+ 100%     19 (longest request)
