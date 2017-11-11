@@ -1,6 +1,9 @@
 Web-todolist  
 
-主页面mainpage使用了go自带的html/template包，用于生成对应URL返回的html文件。其他的页面就没用template了。  
+使用go自带的包编写，没有使用框架，决策依据是想使用go自带的包来写一次web服务程序，体验下原始的go语言。
+感觉用go自带的包写，会更多的去查看源代码，去分析下源码的实现。  
+
+主页面mainpage使用了go自带的html/template包，用于生成对应URL返回的html文件。其他的页面就没用template了。  
 
 稍微看了一下REST原则，概括的说就是：用URL定位资源，用HTTP动词（GET,POST,DELETE,DETC）描述操作。
 具体一点的话，有一个方面是：URL不包含动词，因为"资源"表示一种实体，所以应该是名词，动词应该放在HTTP协议中。
