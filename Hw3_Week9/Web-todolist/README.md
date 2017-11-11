@@ -43,3 +43,63 @@ curl 测试结果（虽然潘老师只说了使用curl测试，为了美观，�
 删除todoitem界面，通过cookie判断是否登录，使用表单，POST方法，通过数据库todoitem表的主键tid来删除todoitem。tid可以通过查询界面查到，操作完成后数据库删除了对应条目。再次增加todoitem时，主键已经变为9，而数据库tid没有7和8，说明7和8的条目已经被删除。
 ![](../Printscreens/deleteTodoitem.png)
 ![](../Printscreens/deleteTodoitem_Result.png)
+
+Apache web 压力测试，测试结果和重要参数解释:  
+命令中-n表示请求数，-c表示并发数  
+$ ab -n 1000 -c 100 http://localhost:8080/  
+//  apache的版本信息  
+This is ApacheBench, Version 2.3 <$Revision: 1706008 $>  
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/  
+Licensed to The Apache Software Foundation, http://www.apache.org/  
+
+Benchmarking localhost (be patient)  
+Completed 100 requests  
+Completed 200 requests  
+Completed 300 requests  
+Completed 400 requests  
+Completed 500 requests  
+Completed 600 requests  
+Completed 700 requests  
+Completed 800 requests  
+Completed 900 requests  
+Completed 1000 requests  
+Finished 1000 requests  
+
+
+Server Software:          
+Server Hostname:        localhost  
+Server Port:            8080  
+
+Document Path:          /  
+Document Length:        461 bytes  
+
+Concurrency Level:      100            //并发数  
+Time taken for tests:   0.250 seconds  //总共使用的时间  
+Complete requests:      1000           //完成的请求数  
+Failed requests:        0              //失败的请求数  
+Total transferred:      578000 bytes   //总共传输字节数，包含http的头信息等  
+HTML transferred:       461000 bytes   //html内容总共传输字节数  
+Requests per second:    3999.86 [#/sec] (mean)  //重要指标！每秒多少请求，就是服务器的吞吐量  
+Time per request:       25.001 [ms] (mean)      //重要指标！用户请求平均等待时间  
+Time per request:       0.250 [ms] (mean, across all concurrent requests)  //重要指标！服务器平均处理时间，就是服务器吞吐量的倒数  
+Transfer rate:          2257.73 [Kbytes/sec] received  //平均每秒网络上的流量  
+
+Connection Times (ms)  //网络上消耗的时间的分解  
+
+|      item     | min | mean[+/-sd] | median |  max |
+| ------------- | --- | ----------- | ------ | ---- |
+| Connect:      | 0   | 2   3.3     |  0     | 14   |
+| Processing:   | 1   | 23  12.3    | 24     | 65   |
+| Waiting:      | 0   | 20  12.6    | 21     | 65   |
+| Total:        | 1   | 24  12.9    | 26     | 66   |
+
+Percentage of the requests served within a certain time (ms)  //请求处理时间的分布情况，重要的是90%的请求的处理时间  
+  50%     26  //50%的请求在26ms内返回  
+  66%     31  //66%的请求在31ms内返回  
+  75%     34  
+  80%     35  
+  90%     41  
+  95%     46  
+  98%     54  
+  99%     57  
+ 100%     66 (longest request)  
