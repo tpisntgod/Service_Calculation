@@ -8,8 +8,10 @@ cloudgo-io
 4.对 /unknown 给出开发中的提示，返回码 5xx  
 
 项目结构：  
-assets保存静态文件  
-![](Printscreens/fileStruct.png)  
+assets保存静态文件，model，view，controller文件夹对应MVC框架对应的部分  
+server文件夹的mainPageHandler.go处理路由/api/mainpage，server.go使用gorilla/mux配置路由，使用urfave/negroni配置和返回一个server。  
+templates文件夹存放html模板文件。包含mainpage界面，增加、删除、查询TodoList操作的结果返回界面和查询开发信息的结果返回界面。  
+![](Printscreens/fileStruct.png)  
 
 具体实现：  
 1.支持静态文件服务  
