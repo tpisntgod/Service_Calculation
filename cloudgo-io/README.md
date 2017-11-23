@@ -49,4 +49,6 @@ TodoList主界面提供了一个查询TodoList使用方法或者开发人员信�
 模仿http包的NotFound函数实现。  
 ![](Printscreens/notimplement.png)  
 需要注意的是，mx.PathPrefix("/api").Handler(view.NotImplementedHandler())这个语句放置的位置  
-要放在处理已经实现的功能对应的路由的函数之后，这样才不会覆盖掉已经实现的功能对应的路由处理函数。
+要放在已经实现的路由处理函数之后，这样才不会覆盖掉对应的路由处理函数。  
+即mx.HandleFunc("/api/mainpage", mainPageHandler(formatter)).Methods("GET")的位置要在  
+mx.PathPrefix("/api").Handler(view.NotImplementedHandler())的位置之前。
