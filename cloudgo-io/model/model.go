@@ -138,19 +138,19 @@ func init() {
 		var user UserAccounts
 		err := rows.Scan(&user.uid, &user.username, &user.password)
 		checkErr(err)
-		fmt.Println(user)
+		//fmt.Println(user)
 		accounts = append(accounts, user)
 	}
 
 	//把mysql数据库的todolist信息导入
 	todorows, err := db.Query("SELECT * FROM todolist")
 	checkErr(err)
-	fmt.Println("todorows")
+	//fmt.Println("todorows")
 	for todorows.Next() {
 		var todo todolist
 		err := todorows.Scan(&todo.tid, &todo.username, &todo.thingstodo)
 		checkErr(err)
-		fmt.Println(todo)
+		//fmt.Println(todo)
 		todolists = append(todolists, todo)
 	}
 }
