@@ -13,6 +13,24 @@ assets保存静态文件
 
 具体实现：  
 1.支持静态文件服务  
-将 path 以 “/” 为前缀的 URL 都定位到 webRoot + "/assets/" 为虚拟根目录的文件系统。
-访问用户登录、注册，todoitem增加、删除、查找
+将 path 以 “/” 为前缀的 URL 都定位到 webRoot + "/assets/" 为虚拟根目录的文件系统。  
+访问用户登录、注册，todoitem增加、删除、查找的网页是，定位到/assets/对应的html。  
 ![](../Printscreens/staticfile.png)
+
+2.支持简单 js 访问  
+先贴一下所有路由对应的Handler的设置，方便以后解释说明，称下图为图H：
+![](../Printscreens/allhandler.png)
+默认界面index.html有一个链接。
+![](../Printscreens/indexpage.png)
+该路由对应的处理函数是view.MainPage  
+处理函数返回mainpage.html  
+![](../Printscreens/writeMainpage.png)
+mainpage.html中使用js修改class="username"的<p>标签的信息  
+![](../Printscreens/MainPage.png)
+mainpage.js代码，通过ajax异步，GET方法访问/api/mainpage，根据返回的信息修改mainpage中class="username"的<p>标签的信息  
+![](../Printscreens/mainpagejs.png)
+根据图H得知，处理路由/api/mainpage的函数是mx.HandleFunc("/api/mainpage", mainPageHandler(formatter)).Methods("GET")
+该函数输出了一个匿名结构 ，并使用JSON序列化输出。该json用于js文件更改数据。  
+![](../Printscreens/apitestfunc.png)
+
+提交表单，并输出一个表格
