@@ -33,4 +33,10 @@ mainpage.js代码，通过ajax异步，GET方法访问/api/mainpage，根据返�
 该函数输出了一个匿名结构 ，并使用JSON序列化输出。该json用于js文件更改数据。  
 ![](../Printscreens/apitestfunc.png)
 
-提交表单，并输出一个表格
+3.提交表单，并输出一个表格
+TodoList主界面提供了一个查询使用方法或者开发人员信息的功能（Check TodoList information按钮对应功能）  
+![](../Printscreens/browsermainpage.png)
+点击Check TodoList information按钮进入该页面，有一个表单，根据表单填写的信息，输出一个表格：  
+![](../Printscreens/CheckTodoListinformation.png)
+输出系统使用方法的表格：
+输出开发者信息的表格：
