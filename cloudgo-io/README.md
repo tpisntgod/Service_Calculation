@@ -54,3 +54,26 @@ TodoList主界面提供了一个查询TodoList使用方法或者开发人员信�
 要放在已经实现的路由处理函数之后，这样才不会覆盖掉对应的路由处理函数。  
 即mx.HandleFunc("/api/mainpage", mainPageHandler(formatter)).Methods("GET")的位置要在  
 mx.PathPrefix("/api").Handler(view.NotImplementedHandler())的位置之前。
+
+项目截图：  
+开始界面：  
+![](Printscreens/cloudgo-io/StartPage.png)  
+主界面：  
+![](Printscreens/cloudgo-io/mainpage.png)  
+注册界面：  
+![](Printscreens/cloudgo-io/register.png)  
+登录界面：  
+![](Printscreens/cloudgo-io/login.png)  
+登陆成功后界面：  
+![](Printscreens/cloudgo-io/afterlogin.png)  
+退出登录界面：  
+![](Printscreens/cloudgo-io/logout.png)  
+增加todoitem界面：  
+![](Printscreens/cloudgo-io/addtodoitem.png)  
+增加todoitem成功后result界面（删除和查询成功后的result界面类似）：  
+![](Printscreens/cloudgo-io/addsuccess.png)  
+查询todoitem界面：  
+![](Printscreens/cloudgo-io/query.png)  
+删除todoitem界面：  
+![](Printscreens/cloudgo-io/delete.png)  
+查询开发信息界面（Check TodoList information按钮进入的界面），第3点已经介绍了，就不重复截图啦。  
