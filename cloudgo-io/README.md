@@ -21,7 +21,7 @@ assets保存静态文件
 先贴一下所有路由对应的Handler的设置，方便以后解释说明，称下图为图H：  
 ![](Printscreens/allhandler.png)  
 默认界面index.html有一个链接。  
-![](Printscreens/indexpage.png)  
+![](Printscreens/indexpage.png)  
 可从图H中得知，该路由对应的处理函数是view.MainPage   
 view.MainPage返回mainpage.html  
 ![](Printscreens/writeMainpage.png)
@@ -38,7 +38,7 @@ mx.HandleFunc("/api/mainpage", mainPageHandler(formatter)).Methods("GET")
 显示表格的html是使用template写的  
 TodoList主界面提供了一个查询TodoList使用方法或者开发人员信息的功能（Check TodoList information按钮对应功能）  
 ![](Printscreens/browsermainpage.png)  
-点击Check TodoList information按钮进入该页面，有一个表单，服务端根据表单填写的信息，输出一个表格，和表格里对应的内容：  
+点击Check TodoList information按钮进入该页面，有一个表单，服务端根据表单填写的信息，输出一个表格，和表格里对应的内容：  
 ![](Printscreens/CheckTodoListinformation.png)  
 输出TodoList使用方法的表格：  
 ![](Printscreens/systemusage.png)  
