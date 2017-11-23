@@ -13,13 +13,6 @@ import (
 
 // NewServer configures and returns a Server.
 func NewServer() *negroni.Negroni {
-	/*
-		formatter := render.New(render.Options{
-			Directory:  "templates",
-			Extensions: []string{".html"},
-			IndentJSON: true,
-		})*/
-
 	formatter := render.New(render.Options{
 		IndentJSON: true,
 	})

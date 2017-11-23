@@ -241,12 +241,12 @@ func Result(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-//NotImplemented 目前没有开发的功能
+//NotImplemented 客户端访问路由是 目前没有开发的功能 的处理函数
 func NotImplemented(w http.ResponseWriter, r *http.Request) {
 	http.Error(w, "501 function Not Implemented", http.StatusNotFound)
 }
 
-//NotImplementedHandler 目前没有开发的功能对应的Handler
+//NotImplementedHandler 处理函数类型转换成http.Handler
 func NotImplementedHandler() http.Handler {
 	return http.HandlerFunc(NotImplemented)
 }
