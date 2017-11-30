@@ -17,6 +17,10 @@
 程序对于GET的错误处理：  
 ![](PrintScreens/geterrorhandle.png)  
 
+orm 是否就是实现了 dao 的自动化？  
+对象-关系映射（Obejct/Relation Mapping,简称ORM）实现了程序应用中的对象到关系数据库中表的自动化持久化，并使用元数据来描述对象和数据库之间的映射关系。本质上，ORM完成的是将数据从一种表现形式转换为另一种表象形式，主要实现程序对象到关系数据库的映射关系。  
+个人认为 orm 实现了 dao 的自动化。因为，对于不同的对象，我们想把对象保存进数据库，需要写不同的sql语句，但是如果我们使用orm，只需要调用相同的函数就能够实现保存数据的功能，因此，orm实现了dao的自动化。  
+
 ab压力测试结果，这是使用ORM访问数据库的结果，get方法，查询所有用户信息（一共8条信息），性能不是很好。  
 ab -n 1000 -c 100 http://localhost:8080/service/userinfo  
 This is ApacheBench, Version 2.3 <$Revision: 1706008 $>  
