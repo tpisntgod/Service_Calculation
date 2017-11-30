@@ -139,6 +139,7 @@ func init() {
 	//把mysql数据库的user账户信息导入
 	rows, err := Db.Query("SELECT * FROM userinfo")
 	checkErr(err)
+	defer rows.Close()
 	for rows.Next() {
 		var user UserAccounts
 		err := rows.Scan(&user.uid, &user.username, &user.password)
@@ -150,6 +151,7 @@ func init() {
 	//把mysql数据库的todolist信息导入
 	todorows, err := Db.Query("SELECT * FROM todolist")
 	checkErr(err)
+	defer todorows.Close()
 	//fmt.Println("todorows")
 	for todorows.Next() {
 		var todo todolist
