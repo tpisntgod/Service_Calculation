@@ -12,6 +12,10 @@ func init() {
 	if err != nil {
 		panic(err)
 	}
+	err = engine.Sync2(new(UserInfo))
+	if err != nil {
+		panic(err)
+	}
 	myengine = engine
 }
 
