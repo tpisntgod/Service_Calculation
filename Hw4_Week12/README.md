@@ -19,8 +19,7 @@
 程序对于GET的错误处理：  
 ![](PrintScreens/geterrorhandle.png)  
 
-ab压力测试结果，get方法，查询所有用户信息（一共8条信息）：  
-个人感觉性能不是很好。  
+ab压力测试结果，这是使用ORM访问数据库的结果，get方法，查询所有用户信息（一共8条信息），性能不是很好。  
 ab -n 1000 -c 100 http://localhost:8080/service/userinfo  
 This is ApacheBench, Version 2.3 <$Revision: 1706008 $>  
 Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/  
@@ -76,6 +75,62 @@ Percentage of the requests served within a certain time (ms)
   99%   5349  
  100%   5426 (longest request)  
  
+ 作为对比，这是直接使用sql语句的ab压力测试结果，可以看到总共使用的时间，用户请求平均等待时间大幅减少，服务器的吞吐量大幅增加，性能提高很多。  
+ ab -n 1000 -c 100 http://localhost:8080/service/userinfo  
+This is ApacheBench, Version 2.3 <$Revision: 1706008 $>  
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/  
+Licensed to The Apache Software Foundation, http://www.apache.org/  
+
+Benchmarking localhost (be patient)  
+Completed 100 requests  
+Completed 200 requests  
+Completed 300 requests  
+Completed 400 requests  
+Completed 500 requests  
+Completed 600 requests  
+Completed 700 requests  
+Completed 800 requests  
+Completed 900 requests  
+Completed 1000 requests  
+Finished 1000 requests  
+
+
+Server Software:          
+Server Hostname:        localhost  
+Server Port:            8080  
+
+Document Path:          /service/userinfo  
+Document Length:        875 bytes  
+
+Concurrency Level:      100  
+Time taken for tests:   0.849 seconds  
+Complete requests:      1000  
+Failed requests:        0  
+Total transferred:      999000 bytes  
+HTML transferred:       875000 bytes  
+Requests per second:    1177.31 [#/sec] (mean)  
+Time per request:       84.939 [ms] (mean)  
+Time per request:       0.849 [ms] (mean, across all concurrent requests)  
+Transfer rate:          1148.57 [Kbytes/sec] received  
+
+Connection Times (ms)  
+              min  mean[+/-sd] median   max  
+Connect:        0    3   6.5      1      23  
+Processing:     0   80  93.0     54     400  
+Waiting:        0   79  92.9     53     398  
+Total:          1   84  92.9     59     403  
+
+Percentage of the requests served within a certain time (ms)  
+  50%     59  
+  66%     73  
+  75%     89  
+  80%    100  
+  90%    127  
+  95%    361  
+  98%    370  
+  99%    400  
+ 100%    403 (longest request)  
+ 
 cloudgo-io-update 项目，在上次作业cloudgo-io的基础上修改  
-上次作业cloudgo-io连接：https://github.com/tpisntgod/Service_Calculation/tree/master/cloudgo-io  
-将cloudgo-io的处理数据、操作数据库的model部分改成了java 经典的entity-dao-service结构模型。  
+上次作业cloudgo-io连接：https://github.com/tpisntgod/Service_Calculation/tree/master/cloudgo-io    
+将cloudgo-io的处理数据、操作数据库的model部分改成了java 经典的entity-dao-service结构模型。    
