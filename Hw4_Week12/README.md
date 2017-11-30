@@ -2,9 +2,7 @@
 
 创建数据库：  
 ![](PrintScreens/createdatabase.png)  
-创建表：  
-![](PrintScreens/createtables.png)  
-表的属性的描述：  
+使用Sync2函数和对应的数据库自动同步，如果对应数据库没有此表，则会自动创建该表，表的描述如下：  
 ![](PrintScreens/describetable.png)  
 用 curl POST 用户名和部门名称到网站。数据库有相应的变化：  
 ![](PrintScreens/post.png)  
