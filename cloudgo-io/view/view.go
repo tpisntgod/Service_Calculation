@@ -204,7 +204,6 @@ func DeleteTodoItem(w http.ResponseWriter, r *http.Request) {
 	if cookieError != nil {
 		ResultInfo = "you have not logged in"
 		http.Redirect(w, r, "/result", http.StatusFound)
-		//fmt.Fprintf(w, "you have not logged in")
 		return
 	}
 	if r.Method == "GET" {
@@ -216,7 +215,6 @@ func DeleteTodoItem(w http.ResponseWriter, r *http.Request) {
 		if err := controller.DeleteTodoItem(cookie.Value, r); err != nil {
 			ResultInfo = err.Error()
 			http.Redirect(w, r, "/result", http.StatusFound)
-			//fmt.Fprintf(w, err.Error())
 			return
 		}
 		ResultInfo = "delete todoitem successfully!"
