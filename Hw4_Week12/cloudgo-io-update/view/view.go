@@ -10,11 +10,11 @@ import (
 	"runtime"
 	"strings"
 
-	"github.com/tpisntgod/Service_Calculation/Hw4_Week12/controller"
+	"github.com/tpisntgod/Service_Calculation/Hw4_Week12/cloudgo-io-update/controller"
 )
 
-var htmlpath = "src/github.com/tpisntgod/Service_Calculation/Hw4_Week12/templates/"
-var pathtoAdd = "/src/github.com/tpisntgod/Service_Calculation/Hw4_Week12/templates/mainpage.html"
+var htmlpath = "src/github.com/tpisntgod/Service_Calculation/Hw4_Week12/cloudgo-io-update/templates/"
+var pathtoAdd = "/src/github.com/tpisntgod/Service_Calculation/Hw4_Week12/cloudgo-io-update/templates/mainpage.html"
 
 //ResultInfo 所有操作redirect到result 用于handler修改模板
 var ResultInfo string

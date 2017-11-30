@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/tpisntgod/Service_Calculation/Hw4_Week12/view"
+	"github.com/tpisntgod/Service_Calculation/Hw4_Week12/cloudgo-io-update/view"
 	"github.com/unrolled/render"
 )
 

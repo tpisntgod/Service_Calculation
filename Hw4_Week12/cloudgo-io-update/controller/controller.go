@@ -6,7 +6,7 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/tpisntgod/Service_Calculation/Hw4_Week12/entities"
+	"github.com/tpisntgod/Service_Calculation/Hw4_Week12/cloudgo-io-update/entities"
 )
 
 //RegisterUser 注册用户
