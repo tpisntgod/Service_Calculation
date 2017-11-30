@@ -24,7 +24,9 @@ type todolist struct {
 
 var accounts []UserAccounts
 var todolists []todolist
-var db *sql.DB
+
+//Db use to defer close
+var Db *sql.DB
 
 //QueryUser 查询一个用户是否存在
 func QueryUser(username string) bool {
@@ -40,10 +42,11 @@ func QueryUser(username string) bool {
 //RegisterUser 注册一个用户
 func RegisterUser(username string, password string) error {
 	//insertSql := fmt.Sprintf("INSERT userinfo SET username=%s,password=%s", username, password)
-	stmt, err := db.Prepare("INSERT userinfo SET username=?,password=?")
+	stmt, err := Db.Prepare("INSERT userinfo SET username=?,password=?")
 	if err != nil {
 		return err
 	}
+	defer stmt.Close()
 	res, err := stmt.Exec(username, password)
 	if err != nil {
 		return err
@@ -62,10 +65,11 @@ func RegisterUser(username string, password string) error {
 
 //AddTodoItem 给用户添加todoitem
 func AddTodoItem(username string, todoitem string) error {
-	stmt, err := db.Prepare("INSERT todolist SET username=?,thingstodo=?")
+	stmt, err := Db.Prepare("INSERT todolist SET username=?,thingstodo=?")
 	if err != nil {
 		return err
 	}
+	defer stmt.Close()
 	res, err := stmt.Exec(username, todoitem)
 	if err != nil {
 		return err
@@ -107,10 +111,11 @@ func DeleteTodoItem(username string, tid int64) error {
 			if todolists[i].username != username {
 				return errors.New("添加该todoitem的用户不是当前用户")
 			}
-			stmt, err := db.Prepare("delete from todolist where tid=?")
+			stmt, err := Db.Prepare("delete from todolist where tid=?")
 			if err != nil {
 				return err
 			}
+			defer stmt.Close()
 			_, err = stmt.Exec(tid)
 			if err != nil {
 				return err
@@ -129,10 +134,10 @@ func DeleteTodoItem(username string, tid int64) error {
 func init() {
 	database, err := sql.Open("mysql", "root:houxi5201314@/todolist_accounts?charset=utf8")
 	checkErr(err)
-	db = database
+	Db = database
 
 	//把mysql数据库的user账户信息导入
-	rows, err := db.Query("SELECT * FROM userinfo")
+	rows, err := Db.Query("SELECT * FROM userinfo")
 	checkErr(err)
 	for rows.Next() {
 		var user UserAccounts
@@ -143,7 +148,7 @@ func init() {
 	}
 
 	//把mysql数据库的todolist信息导入
-	todorows, err := db.Query("SELECT * FROM todolist")
+	todorows, err := Db.Query("SELECT * FROM todolist")
 	checkErr(err)
 	//fmt.Println("todorows")
 	for todorows.Next() {
