@@ -9,7 +9,6 @@ import (
 var mydb *sql.DB
 
 func init() {
-	//https://stackoverflow.com/questions/45040319/unsupported-scan-storing-driver-value-type-uint8-into-type-time-time
 	db, err := sql.Open("mysql", "root:houxi5201314@/todolist_accounts?charset=utf8")
 	if err != nil {
 		panic(err)
