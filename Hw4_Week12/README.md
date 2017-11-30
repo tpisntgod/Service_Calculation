@@ -1,5 +1,5 @@
-使用 ORM（Object Relational Mapping）库  
-![](PrintScreens/fileStruct.png)  
+"cloudgo-xorm" 项目，使用 ORM（Object Relational Mapping）库和数据库交互  
+
 创建数据库：  
 ![](PrintScreens/createdatabase.png)  
 创建表：  
@@ -18,3 +18,7 @@
 ![](PrintScreens/getsuccess.png)  
 程序对于GET的错误处理：  
 ![](PrintScreens/geterrorhandle.png)  
+
+cloudgo-io-update 项目，在上次作业cloudgo-io的基础上修改  
+上次作业cloudgo-io连接：https://github.com/tpisntgod/Service_Calculation/tree/master/cloudgo-io  
+将cloudgo-io的处理数据、操作数据库的model部分改成了java 经典的entity-dao-service结构模型。  
