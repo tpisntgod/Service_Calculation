@@ -36,7 +36,7 @@ func main() {
 
 	syncRequest()
 
-	fmt.Printf("%s\n\n", "------------我是分割线------------")
+	fmt.Printf("\n%s\n\n", "------------我是分割线------------")
 	fmt.Printf("%s\n", "为每个 HTTP 请求设计一个 goroutine ，利用 Channel 搭建基于消息的异步机制，实现图 6-3")
 
 	asyncRequest()

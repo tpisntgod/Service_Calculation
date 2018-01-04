@@ -72,8 +72,7 @@ func HTTPGetAsync(q string, ch chan string) {
 	var result resultJSON
 	err = json.Unmarshal(body, &result)
 	CheckErr(err)
-	transResult := result.TransResult[0]["dst"]
-	ch <- transResult
+	ch <- fmt.Sprintln(result.TransResult[0]["src"], ":", result.TransResult[0]["dst"])
 }
 
 //CheckErr check err
